@@ -2,11 +2,19 @@
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
+| Column                | Type    | Options     |
+| --------------------- | ------- | ----------- |
+| nickname              | string  | null: false |
+| email                 | string  | null: false |
+| password              | string  | null: false |
+| password_confirmation | string  | null: false |
+| last_name             | string  | null: false |
+| first_name            | string  | null: false |
+| last_name_kana        | string  | null: false |
+| first_name_kana       | string  | null: false |
+| birthday_year         | integer | null: false |
+| birthday_month        | integer | null: false |
+| birthday_day          | integer | null: false |
 
 ### Association
 
@@ -16,24 +24,25 @@
 
 ## items テーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| item_name    | string  | null: false |
-| category     | string  | null: false |
-| price        | integer | null: false |
+| Column          | Type    | Options     |
+| --------------- | ------- | ----------- |
+| item_name       | string  | null: false |
+| item_text       | text    | null: false |
+| price           | integer | null: false |
+| category_id     | integer | null: false |
+| item_status_id  | integer | null: false |
+
 
 ### Association
 
 - belongs_to :user
-- has_many   :orders
+- has_one    :order
 
 
 ## orders テーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
-| seller    | string     | null: false                    |
-| purchaser | string     | null: false                    |
 | user_id   | reference  | null: false, foreign_key: true |
 | item_id   | reference  | null: false, foreign_key: true |                    |
 
@@ -41,16 +50,21 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shippings
+- has_one    :shipping
 
 ## shippings テーブル
 
 | Column           | Type      | Options                  |
 | ---------------- | --------- | ------------------------ |
+| postal_code      | integer   | null: false              |
+| municipality     | string    | null: false              |
 | address          | string    | null: false              |
-| purchaser        | string    | null: false              |
+| building_name    | string    | null: false              |
+| phone_number     | integer   | null: false              |
+| shipping_area_id | integer   | null: false              |
 | shipping_price   | integer   | null: false              |
-| shipping_charges | integer   | null: false              |
+| shipping_cost_id | integer   | null: false              |
+| shipping_days_id | integer   | null: false              |
 
 ### Association
 
