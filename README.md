@@ -6,8 +6,6 @@
 | --------------------- | ------- | ----------- |
 | nickname              | string  | null: false |
 | email                 | string  | null: false |
-| password              | string  | null: false |
-| encrypted_password    | string  | null: false |
 | last_name             | string  | null: false |
 | first_name            | string  | null: false |
 | last_name_kana        | string  | null: false |
@@ -24,16 +22,15 @@
 
 | Column           | Type      | Options                        |
 | ---------------- | --------- | ------------------------------ |
-| item_name        | string    | null: false                    |
-| item_text        | text      | null: false                    |
+| name             | string    | null: false                    |
+| text             | text      | null: false                    |
 | price            | integer   | null: false                    |
 | category_id      | integer   | null: false                    |
 | item_status_id   | integer   | null: false                    |
-| shipping_price   | integer   | null: false                    |
 | shipping_cost_id | integer   | null: false                    |
 | shipping_area_id | integer   | null: false                    |
 | shipping_days_id | integer   | null: false                    |
-| user_id          | reference | null: false, foreign_key: true |
+| user             | reference | null: false, foreign_key: true |
 
 ### Association
 
@@ -45,8 +42,8 @@
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
-| user_id   | reference  | null: false, foreign_key: true |
-| item_id   | reference  | null: false, foreign_key: true |                    |
+| user      | reference  | null: false, foreign_key: true |
+| item      | reference  | null: false, foreign_key: true |                    |
 
 ### Association
 
@@ -63,8 +60,8 @@
 | municipality     | string    | null: false                    |
 | address          | string    | null: false                    |
 | building_name    | string    |                                |
-| phone_number     | integer   | null: false                    |
-| order_id         | reference | null: false, foreign_key: true |
+| phone_number     | string    | null: false                    |
+| order            | reference | null: false, foreign_key: true |
 
 ### Association
 
