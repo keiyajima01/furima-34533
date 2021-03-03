@@ -1,24 +1,57 @@
-# README
+# テーブル 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| name     | string | null: false |
+| email    | string | null: false |
+| password | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :orders
 
-* Configuration
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column       | Type    | Options     |
+| ------------ | ------- | ----------- |
+| item_name    | string  | null: false |
+| category     | string  | null: false |
+| price        | integer | null: false |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_many   :orders
 
-* Deployment instructions
 
-* ...
+## orders テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| seller    | string     | null: false                    |
+| purchaser | string     | null: false                    |
+| user_id   | reference  | null: false, foreign_key: true |
+| item_id   | reference  | null: false, foreign_key: true |                    |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one    :shippings
+
+## shippings テーブル
+
+| Column           | Type      | Options                  |
+| ---------------- | --------- | ------------------------ |
+| address          | string    | null: false              |
+| purchaser        | string    | null: false              |
+| shipping_price   | integer   | null: false              |
+| shipping_charges | integer   | null: false              |
+
+### Association
+
+- belongs_to :order
