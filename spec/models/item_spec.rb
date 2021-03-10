@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-    
+    test
 
     context '出品できない場合' do
       it 'nameが空だと保存できないこと' do
