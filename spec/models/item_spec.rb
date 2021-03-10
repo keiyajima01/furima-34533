@@ -11,8 +11,6 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-    test
-
     context '出品できない場合' do
       it 'nameが空だと保存できないこと' do
         @item.name = ''
@@ -28,6 +26,31 @@ RSpec.describe Item, type: :model do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'category_idが空だと保存ができないこと' do
+        @item.category_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'item_status_idが空だと保存ができないこと' do
+        @item.item_status_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item status can't be blank")
+      end
+      it 'shipping_area_idが空だと保存ができないこと' do
+        @item.shipping_area_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area can't be blank")
+      end
+      it 'shipping_cost_idが空だと保存ができないこと' do
+        @item.shipping_cost_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
+      end
+      it 'shipping_days_id空だと保存ができないこと' do
+        @item.shipping_days_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
       end
       it 'priceが全角数字だと保存できないこと' do
         @item.price = '１１１１'
