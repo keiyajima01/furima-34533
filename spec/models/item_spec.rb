@@ -27,43 +27,43 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it 'category_idが空だと保存ができないこと' do
-        @item.category_id = ''
+      it 'category_idが無効だと保存ができないこと' do
+        @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category must be other than 0")
       end
-      it 'item_status_idが空だと保存ができないこと' do
-        @item.item_status_id = ''
+      it 'item_status_idが無効だと保存ができないこと' do
+        @item.item_status_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item status can't be blank")
+        expect(@item.errors.full_messages).to include("Item status must be other than 0")
       end
-      it 'shipping_area_idが空だと保存ができないこと' do
-        @item.shipping_area_id = ''
+      it 'shipping_area_idが無効だと保存ができないこと' do
+        @item.shipping_area_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping area can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping area must be other than 0")
       end
-      it 'shipping_cost_idが空だと保存ができないこと' do
-        @item.shipping_cost_id = ''
+      it 'shipping_cost_idが無効だと保存ができないこと' do
+        @item.shipping_cost_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping cost can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping cost must be other than 0")
       end
-      it 'shipping_days_id空だと保存ができないこと' do
-        @item.shipping_days_id = ''
+      it 'shipping_days_id無効だと保存ができないこと' do
+        @item.shipping_days_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping days must be other than 0")
       end
       it 'priceが全角数字だと保存できないこと' do
-        @item.price = '１１１１'
+        @item.price = '２０００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
       it 'priceが300円未満では保存できないこと' do
-        @item.price = '111'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
       it 'priceが1,000,000円を超過すると保存できないこと' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
