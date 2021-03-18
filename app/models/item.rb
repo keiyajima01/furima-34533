@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_cost
   belongs_to :shipping_days
   belongs_to :user
-  # has_one :order
+  has_one :order
   has_one_attached :image
 
   with_options presence: true do
