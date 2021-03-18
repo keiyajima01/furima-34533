@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe OrderShipping, type: :model do
   before do
     user = FactoryBot.create(:user)
-    @order_shipping = FactoryBot.build(:order_shipping, user_id: user.id)
+    item = FactoryBot.create(:item)
+    @order_shipping = FactoryBot.build(:order_shipping, user_id: user.id, item_id: item.id)
+    sleep 0.1
   end
 
   describe '発送先情報の保存' do
@@ -21,6 +23,16 @@ RSpec.describe OrderShipping, type: :model do
       end
     end
     context '発送先情報の保存ができない場合' do
+      it 'user_idがからだと保存できない' do
+        @order_shipping.user_id = ''
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idがからだと保存できない' do
+        @order_shipping.item_id = ''
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
+      end
       it 'postal_codeが空だと保存できないこと' do
         @order_shipping.postal_code = ''
         @order_shipping.valid?
@@ -29,7 +41,7 @@ RSpec.describe OrderShipping, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_shipping.postal_code = '1234567'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")        
+        expect(@order_shipping.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
       it 'shipping_area_idを選択していないと保存できないこと' do
         @order_shipping.shipping_area_id = ''
