@@ -16,7 +16,7 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping).to be_valid
       end
       it 'phone_numberが11桁以内の数値だと保存できる' do
-        @order_shipping.phone_number = '09012345678'
+        @order_shipping.phone_number = '0901234567'
         expect(@order_shipping).to be_valid
       end
     end
@@ -36,6 +36,11 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Shipping area can't be blank")
       end
+      it 'shipping_area_idが０以外でないと登録できないこと' do
+        @order_shipping.shipping_area_id = 0
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Shipping area must be other than 0")
+      end
       it 'municipalityが空だと保存ができない' do
         @order_shipping.municipality = ''
         @order_shipping.valid?
@@ -51,7 +56,7 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが12以上だと保存できない' do
+      it 'phone_numberが12桁以上だと保存できない' do
         @order_shipping.phone_number = '123456789012'
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input half-width number")
