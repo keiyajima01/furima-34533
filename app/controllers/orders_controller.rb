@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only: [:index]
+  before_action :move_to_item_path, only: [:index]
 
   def index
     @order_shipping = OrderShipping.new
@@ -34,6 +37,18 @@ class OrdersController < ApplicationController
         card: order_params[:token],
         currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_item_path
+    if current_user == @item.user
+      redirect_to items_path
+    elsif @item.order != nil
+      redirect_to items_path
+    end
   end
 
 end
