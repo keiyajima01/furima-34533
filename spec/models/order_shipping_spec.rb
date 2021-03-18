@@ -73,6 +73,11 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input half-width number")
       end
+      it 'phone_numberが全角では保存できない' do
+        @order_shipping.phone_number = '１１１１'
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Phone number is invalid. Input half-width number")
+      end
       it 'tokenが空だと登録できない' do
         @order_shipping.token = ''
         @order_shipping.valid?

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
-  before_action :move_to_item_path, only: [:index, :create]
+  before_action :move_to_root_path, only: [:index, :create]
 
   def index
     @order_shipping = OrderShipping.new
@@ -37,11 +37,9 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def move_to_item_path
-    if current_user == @item.user
-      redirect_to items_path
-    elsif @item.order != nil
-      redirect_to items_path
+  def move_to_root_path
+    if current_user == @item.user || @item.order != nil
+      redirect_to root_path
     end
   end
 
