@@ -13,9 +13,9 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :text
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
-    validates :price, format: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width number." }
-    with_options numericality: { other_than: 0 } do
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は300〜9999999の金額を入力してください"}
+    validates :price, format: { with: /\A[0-9]+\z/, message: "半角数字で入力してください" }
+    with_options numericality: { other_than: 0, message: "を入力してください" } do
       validates :category_id
       validates :item_status_id
       validates :shipping_area_id
