@@ -163,7 +163,7 @@
   text-align: left;
 }
 
-.comment-btn {
+.comment_btn {
   line-height: 48px;
   background-color: #3CCACE;
   border: 1px solid #3CCACE;
@@ -182,6 +182,16 @@
 
 .comment-flag-icon {
   margin: 10px 5px 0 0;
+}
+
+.comments_lists{
+  padding-left: 20px; 
+}
+
+.comments_list{
+  list-style-type: none;
+  padding-bottom: 5px;
+  text-align: left;
 }
 
 .links {
