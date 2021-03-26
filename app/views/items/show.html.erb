@@ -77,6 +77,7 @@
   </div>
   <%# /商品の概要 %>
 
+  <% if user_signed_in? %>
   <div class="comment-box">
     <%= form_with model: [@item, @comment], local: true do |f| %>
       <%= f.text_area :text,  class: "comment-text" %>
@@ -96,6 +97,7 @@
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </p>
   </div>
+  <% end %>
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品
