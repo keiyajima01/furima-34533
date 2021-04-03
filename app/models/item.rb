@@ -24,4 +24,12 @@ class Item < ApplicationRecord
       validates :shipping_days_id
     end
   end
+
+  def self.search(search)
+    if search != ""
+      Item.where('text LIKE(?)', "%#{search}%")
+    else
+      Item.all
+    end
+  end
 end
